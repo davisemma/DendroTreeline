@@ -1,3 +1,4 @@
+#Code to validate living tree density estimation method --- 
 rm(list=ls())
 library("car")
 library('dplyr')
@@ -5,8 +6,7 @@ library('ggplot2')
 library('reshape2')
 library('psych')
 library('ggthemes')
-
-setwd("~/Desktop/PhD/Research Data/Dendro Analysis/Regional Treering /Data")
+library('breakpoint')
 
 #READ IN AND FORMAT SAMPLES from WIL and HIL
 #Assuming all WIL and HIL dated samples are all samples
@@ -199,3 +199,4 @@ bp.dat_perc75 <- rbind(WILbp_perc75, HILbp_perc75)
 WIL_perc75 <- as.data.frame(perc75_ages[perc75_ages$SiteID == 'WIL', ]) [c(11),]
 HIL_perc75 <- as.data.frame(perc75_ages[perc75_ages$SiteID == 'HIL', ]) [c(11),]
 bp.yrs.perc75 <- rbind(WIL_perc75, HIL_perc75)
+

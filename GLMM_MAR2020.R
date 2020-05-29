@@ -18,8 +18,6 @@ overdisp_fun <- function(model) {
   c(chisq=Pearson.chisq,ratio=prat,rdf=rdf,p=pval)
 }
 
-setwd("~/Desktop/PhD/Research Data/Dendro Analysis/Regional Treering /Data")
-
 samples <- read.csv("REGION_Samples.csv")
 
 #Giving bin dats to est. years 
@@ -64,8 +62,7 @@ WIL<-read.csv('5yrWIL.csv')[1:23,]
 GSP<-read.csv('5yrGSP.csv')[1:23,]
 
 #Read in establishment data (for formatting)
-setwd("~/Desktop/PhD/Research Data/Dendro Analysis/Regional Treering /Data")
-estdata <- read_csv("~/Desktop/PhD/Research Data/Dendro Analysis/Regional Treering /Data/REGION5yrFreqBins.csv")
+estdata <- read_csv("REGION5yrFreqBins.csv")
 
 dfs<-list('WIL'=WIL,'HIL'=HIL, 'GSP'=GSP, 'FTA'=FTA, 'FTB'=FTB,'HUM'=HUM,'HWA'=HWA, 'PMR'=PMR, 'SSG'=SSG)
 
