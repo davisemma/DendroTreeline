@@ -4,7 +4,6 @@ pkgs <- c("dplR", "bootRes", "dplyr", "ggsci", "ggthemes", "scales")
 lapply(pkgs, require, character.only=TRUE)
 
 #Reading in text files
-setwd("~/Desktop/PhD/Research Data/Dendro Analysis/Regional Treering /Chronology Development/Tucson/3 - Species Levels")
 #Read only .txt extentions
 myFiles <- list.files(pattern = "*.txt")  
 #Get file names without extention

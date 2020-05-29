@@ -4,7 +4,7 @@ library(dplR)
 library(bootRes)
 library(dplyr)
 
-setwd("~/Desktop/PhD/Research Data/Dendro Analysis/Regional Treering /Chronology Development/Tucson/3 - Species Levels")
+
 myFiles <- list.files(pattern = "*.txt") 
 myNames <- myFiles %>%
   substr(.,1,nchar(.)-7)
@@ -68,8 +68,6 @@ eps.1900 <- lapply(det.chron, rwi.stats.running, window.length=20) %>%
 ###eps.test give the years where EPS starts being >0.85
 
 #Read in climate data
-setwd("~/Desktop/PhD/Research Data/Dendro Analysis/Regional Treering /Chronology Development/Climate Data/Chrono Climate Data MAR 2020")
-
 WILsea<- read.csv("WILsea_2020.csv")
 HILsea<- read.csv("HILsea_2020.csv")
 GSPsea<- read.csv("GSPsea_2020.csv")

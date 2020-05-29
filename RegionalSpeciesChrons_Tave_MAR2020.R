@@ -6,7 +6,6 @@ pkgs <- c("dplR", "bootRes", "dplyr", "ggsci", "ggthemes", "scales")
 lapply(pkgs, require, character.only=TRUE)
 
 #Reading in text files
-setwd("~/Desktop/PhD/Research Data/Dendro Analysis/Regional Treering /Chronology Development/Tucson/3 - Species Levels")
 #Read only .txt extentions
 myFiles <- list.files(pattern = "*.txt")  
 #Get file names without extention
@@ -145,7 +144,7 @@ growth <- ggplot(plt.dat, aes(x = rownames(plt.dat), y=Chron, group=Species))+
   ylab('Regional residual chronology')+
   xlab('Year')+
   theme_few()+
-  theme_emma2()
+  theme_emma()
 growth
 #ggsave(plot=growth, "~/Desktop/RegChronGrowth.pdf", device = "pdf", width = 8.5, height = 3, units = c("in"), dpi= 600)  
 

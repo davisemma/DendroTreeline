@@ -8,8 +8,6 @@ library('ggplot2')
 library('ggthemes')
 library('ggsci')
 
-setwd("~/Desktop/PhD/Research Data/Dendro Analysis/Regional Treering /Data")
-
 samples <- read.csv("REGION_SamplesJAN2019.csv") %>%
   select(-"X") %>%
   rename(Elev = Elev.y) %>%

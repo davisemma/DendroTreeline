@@ -8,9 +8,7 @@ library('RColorBrewer')
 
 source("http://peterhaschke.com/Code/multiplot.R")
 
-setwd("~/Desktop/PhD/Research Data/Climate Data/Climate BC")
-
-data <- read.csv("~/Desktop/PhD/Research Data/Climate Data/Climate BC/Region2_Seasonal.csv")
+data <- read.csv("Region2_Seasonal.csv")
 
 mypal <-c("#428EAD","#FF875F","#22A782","#997965","#E0C06A",'#D19762', "#C48758", "grey")
 
@@ -96,18 +94,7 @@ clim.sum <- data %>%
             PASwt = mean(PAS_wt),
             PPTsm = mean(PPT_sm))
 
-test <- t(clim.sum)
-colnames(test) = test[1,]
 
-diffs <- as.data.frame(test) %>%
-  filter(., Historical != c('Historical')) %>%
-  mutate(CNRM_RCP45 = as.numeric(paste(CNRM_RCP45)),
-         CNRM_RCP85 = as.numeric(paste(CNRM_RCP85)),
-         Historical = as.numeric(paste(Historical)))%>%
-  mutate(Perc.RCP45 = ((CNRM_RCP45 - Historical) / Historical),
-         Perc.RCP85 = ((CNRM_RCP85 - Historical) / Historical),
-         Mag.RCP45 = CNRM_RCP45 - Historical,
-         Mag.RCP85 = CNRM_RCP85 - Historical)
 
 
 
