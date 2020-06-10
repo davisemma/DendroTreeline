@@ -3,7 +3,9 @@
 ##In this version, run w full dataset (bins up to 2010)
 
 rm(list=ls())
-packs <- c('car','ggplot2','ggthemes','MuMIn','dplyr', 'reshape2', 'readr', 'tidyr', 'lme4')
+setwd("~/DendroTreeline")
+
+packs <- c('car','ggplot2','ggthemes','dplyr', 'reshape2', 'readr', 'tidyr', 'lme4', 'readr')
 lapply(packs, library, character.only = TRUE)
 detach("package:dplyr", unload=TRUE)
 library("dplyr")
@@ -50,7 +52,7 @@ sp.dat[is.na(sp.dat)] <- 0
 ####
 
 #Bringing in climate data
-setwd("~/Desktop/PhD/Research Data/Dendro Analysis/Climate WNA/Seasonal/")
+setwd("~/DendroTreeline")
 FTA<-read.csv('5yrFTA.csv')[1:23,]
 FTB<-read.csv('5yrFTB.csv')[1:23,]
 HUM<-read.csv('5yrHUM.csv')[1:23,]
@@ -135,7 +137,7 @@ sel.dat <- freq.dat[myvars]
 mod.dat <- merge(sel.dat, sp.dat)
 
 #Reading in subsample WILHIL Data
-div.dat <- read_csv("~/Desktop/PhD/Research Data/Dendro Analysis/Regional Treering /Data/WILHIL_GLMMsampledat.csv")
+div.dat <- read_csv("WILHIL_GLMMsampledat.csv")
 
 test <- mod.dat %>%
   filter(SiteID == 'WIL' | SiteID == 'HIL') 
@@ -153,6 +155,7 @@ mod.dat2 <- rbind(mod.dat, test.merge2) %>%
   filter(SiteID != 'WIL' & SiteID != 'HIL')
 mod.dat2[,3:11] <- scale(mod.dat2[,3:11])
 
+#write.csv(mod.dat2, 'GLMM_Data.csv')
 
 #ALL SPECIES TOGETHER
 mod.test <-glmer(Count ~ Tave_sm + PAS_wt + PAS_sp + PPT_sm  + Tave_sm*PPT_sm + (1|Species) + (1|bins) + (1|SiteID), family=poisson, data=filter(mod.dat2))
