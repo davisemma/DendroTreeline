@@ -1,6 +1,6 @@
 #THIS CODE: Creates models and plots of establishment frequencies and residuals in 5yr bins
-#This version has adjusted bins and goes to end of dataset
-#(MAR 14/20)-------------------------------------------
+#Establishment frequency calculations 
+#June 10, 2020
 rm(list=ls())
 library('car')
 library('dplyr')
@@ -8,7 +8,7 @@ library('ggplot2')
 library('RColorBrewer')
 library('ggthemes')
 
-setwd("~/Desktop/PhD/Research Data/Dendro Analysis/Regional Treering /Data")
+setwd("~/DendroTreeline")
 
 samples <- read.csv("REGION_Samples.csv")
 
@@ -23,7 +23,8 @@ samp.sel <- samples %>%
   mutate(Species = factor(Species, levels = c('ABLA', 'LALY', 'PIAL', 'PIEN'))) %>%
   dplyr::mutate(Vline = ifelse(SiteID == "WIL", 1960, ifelse(SiteID == "HIL", 1955, ifelse(SiteID== "GSP", 1975, ifelse(SiteID == "FTA", 1965, ifelse(SiteID == "FTB", 1965, ifelse(SiteID == "PMR", 1955, ifelse(SiteID == "SSG", 1970, NA))))))))
 
-###PLOT BY SPECIES
+
+#PLOT BY SITE
 mypal <- c("#4B4B4B","#A2A5A5",'#E2E2E2', "#717171")
 theme_emma <- function(){  
   theme(
@@ -43,7 +44,10 @@ bin<-as.array((cut(samp.sel$EstYear, breaks, right=FALSE))) #give each est year 
 bins<-as.numeric(substring(bin,2,5)) #Record the bin value
 samp.sel<-(cbind(samp.sel,bins)) #Combine
 
-sp.plt2 <- ggplot(samp.sel,
+#write.csv(samp.sel, 'REGIONAL_Samples_FIN.csv')
+
+
+site.plt <- ggplot(samp.sel,
        aes(bins))+
   geom_histogram(binwidth=5, aes(fill = Species), color = "black", size = 0.1)+
   facet_wrap(~ SiteID, nrow=3, ncol=3, scales = 'free')+
@@ -56,20 +60,10 @@ sp.plt2 <- ggplot(samp.sel,
   theme(legend.position="bottom")+
   geom_vline(aes(xintercept = Vline), linetype="longdash", col='red')
 
-sp.plt2
+site.plt
 
-#ggsave(plot=sp.plt2, "~/Desktop/SpEstFreq_March2020b.pdf", device = "pdf", width = 6.5, height = 5, units = c("in"), dpi= 600)
+#ggsave(plot=site.plt, "SpEstFreq_March2020b.pdf", device = "pdf", width = 6.5, height = 5, units = c("in"), dpi= 600)
 
-rm(list=ls())
-library('car')
-library('dplyr')
-library('ggplot2')
-library('RColorBrewer')
-library('ggthemes')
-
-setwd("~/Desktop/PhD/Research Data/Dendro Analysis/Regional Treering /Data")
-
-samples <- read.csv("REGION_Samples.csv")
 
 #Set levels order for graphing
 samples$SiteID <- factor(samples$Site, levels = c('WIL', 'HIL', 'GSP', 'FTA','FTB', 'HWA', 'SSG','PMR', 'HUM'))
@@ -102,7 +96,8 @@ bin<-as.array((cut(samp.sel$EstYear, breaks, right=FALSE))) #give each est year 
 bins<-as.numeric(substring(bin,2,5)) #Record the bin value
 samp.sel<-(cbind(samp.sel,bins)) #Combine
 
-sp.plt2 <- ggplot(samp.sel,
+#Plot of establishment by species x site
+sp.site <- ggplot(samp.sel,
                   aes(Elev))+
   geom_histogram(binwidth=5, aes(fill = Species), color = "black", size = 0.1)+
   facet_wrap(SiteID ~ Species, scales = 'free')+
@@ -115,5 +110,5 @@ sp.plt2 <- ggplot(samp.sel,
   theme(legend.position="bottom")
   #geom_vline(aes(xintercept = Vline), linetype="longdash", col='red')
 
-sp.plt2
+sp.site
 
